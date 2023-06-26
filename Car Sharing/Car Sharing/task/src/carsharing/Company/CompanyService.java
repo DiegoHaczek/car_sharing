@@ -1,22 +1,18 @@
 package carsharing.Company;
 
+import carsharing.DBClient;
+
 import java.sql.SQLException;
 import java.util.Scanner;
 
 public class CompanyService {
     private final CompanyDAO dao;
-
-    public CompanyService(String fileName) {
-        this.dao = new CompanyDAO(fileName);
+    public CompanyService(DBClient dbClient) {
+        this.dao = new CompanyDAO(dbClient);
     }
 
     public void createCompanyTable(){
-        try{
-            dao.createTableCompany();
-        }
-        catch (SQLException e){
-            System.out.println(e.getMessage());;
-        }
+        dao.createTableCompany();
     }
 
     public void createCompany(){

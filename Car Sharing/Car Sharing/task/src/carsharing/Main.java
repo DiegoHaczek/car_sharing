@@ -4,7 +4,6 @@ import carsharing.Car.CarDAO;
 import carsharing.Car.CarService;
 import carsharing.Company.CompanyDAO;
 import carsharing.Company.CompanyService;
-import carsharing.Customer.Customer;
 import carsharing.Customer.CustomerDAO;
 import carsharing.Customer.CustomerService;
 
@@ -17,11 +16,12 @@ public class Main {
     public static String DATABASE_URL = "jdbc:h2:./src/carsharing/db/";
 
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         String fileName = (args.length>0) ? args[1] : "carsharing";
-        CompanyService companyService = new CompanyService(fileName);
-        CarService carService = new CarService(fileName);
-        CustomerService customerService = new CustomerService(fileName);
+        DBClient dbClient = new DBClient(fileName);
+        CompanyService companyService = new CompanyService(dbClient);
+        CarService carService = new CarService(dbClient);
+        CustomerService customerService = new CustomerService(dbClient);
         companyService.createCompanyTable();
         carService.createCarTable();
         customerService.createCustomerTable();
@@ -46,9 +46,9 @@ public class Main {
         }
     }
 
-    private static void customerMenu(CompanyService companyService, CarService carService, CustomerService customerService) {
+    private static void customerMenu(CompanyService companyService,
+                                     CarService carService, CustomerService customerService) {
         System.out.println("\nChoose a customer:");
-
         int customerOption = -1;
         Scanner scan = new Scanner(System.in);
         while (customerOption != 0) {

@@ -1,6 +1,7 @@
 package carsharing.Customer;
 
 import carsharing.Company.CompanyDAO;
+import carsharing.DBClient;
 
 import java.sql.SQLException;
 import java.util.Arrays;
@@ -10,8 +11,8 @@ import java.util.Scanner;
 public class CustomerService {
     private final CustomerDAO dao;
 
-    public CustomerService(String fileName) {
-        this.dao = new CustomerDAO(fileName);
+    public CustomerService(DBClient dbClient) {
+        this.dao = new CustomerDAO(dbClient);
     }
 
     public void createCustomerTable(){
@@ -79,8 +80,8 @@ public class CustomerService {
     public void printRentedCar(int customerId) {
         try{
             Map<String,String> rentedCarInfo = dao.getRentedCar(customerId);
-            System.out.println("\nYour rented car:\n"+rentedCarInfo.get("car_name")+
-                    "\nCompany:\n" + rentedCarInfo.get("company") + "\n");
+            System.out.println("\nYour rented car:\n"+rentedCarInfo.get("NAME")+
+                    "\nCompany:\n" + rentedCarInfo.get("COMPANY") + "\n");
         }catch(SQLException e){
             System.out.println(Arrays.toString(e.getStackTrace()) +"\n"+ e.getMessage());
         }
