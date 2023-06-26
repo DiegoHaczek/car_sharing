@@ -20,6 +20,7 @@ public class CarDAO {
             " COMPANY_ID int not null, " +
             " primary key (ID), " +
             " foreign key (COMPANY_ID) references COMPANY(ID))";
+
     private final String SELECT_ALL = "select *, " +
             "ROW_NUMBER() over(order by id) as NEWID " +
             "from CAR " +
@@ -28,7 +29,9 @@ public class CarDAO {
     private final String SELECT_AVAILABLE = "select CAR.NAME as NAME, ROW_NUMBER() over(order by CAR.ID) as ID from CAR " +
             "left join CUSTOMER on CAR.ID = CUSTOMER.RENTED_CAR_ID " +
             "where (CUSTOMER.NAME is null) and (CAR.COMPANY_ID = %d );";
+
     private final String DROP_TABLE = "drop table Car";
+
     private final String INSERT = "insert into CAR (NAME,COMPANY_ID) " +
             " values ('%s',%d);";
 
@@ -36,7 +39,7 @@ public class CarDAO {
         this.dbClient = dbClient;
     }
 
-    public void createTableCar () throws SQLException {
+    public void createTableCar () {
         dbClient.run(CREATE_TABLE);
     }
 
@@ -55,11 +58,11 @@ public class CarDAO {
                 .toList();
         return (carList.isEmpty()) ? Optional.empty() : Optional.of(carList);
     }
-    public Optional<List<Car>> listAllCars(int companyId) throws SQLException {
+    public Optional<List<Car>> listAllCars(int companyId) {
         return this.listCars(companyId,SELECT_ALL);
     }
 
-    public Optional<List<Car>> listAvailableCars(int companyId) throws SQLException {
+    public Optional<List<Car>> listAvailableCars(int companyId) {
         return this.listCars(companyId,SELECT_AVAILABLE);
     }
 
