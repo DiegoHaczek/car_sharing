@@ -12,19 +12,22 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static String DATABASE_DRIVER = "org.h2.Driver";
     public static String DATABASE_URL = "jdbc:h2:./src/carsharing/db/";
+    private static final DBClient dbClient = new DBClient("carsharing");
+    private final static CompanyService companyService = new CompanyService(dbClient);
+    private final static CarService carService = new CarService(dbClient);
+    private final static CustomerService customerService = new CustomerService(dbClient);
 
-
-    public static void main(String[] args) {
-        String fileName = (args.length>0) ? args[1] : "carsharing";
-        DBClient dbClient = new DBClient(fileName);
-        CompanyService companyService = new CompanyService(dbClient);
-        CarService carService = new CarService(dbClient);
-        CustomerService customerService = new CustomerService(dbClient);
+    static {
         companyService.createCompanyTable();
         carService.createCarTable();
         customerService.createCustomerTable();
+    }
+    
+    public static void main(String[] args) {
+        if (args.length>0){
+           dbClient.setDbName(args[1]);
+        }
         Scanner scan = new Scanner(System.in);
         int menuOption = -1;
         while(menuOption != 0) {
@@ -32,10 +35,10 @@ public class Main {
             menuOption = scan.nextInt();
             switch (menuOption) {
                 case 1:
-                    managerMenu(companyService, carService);
+                    managerMenu();
                     break;
                 case 2:
-                    customerMenu(companyService,carService,customerService);
+                    customerMenu();
                     break;
                 case 3:
                     customerService.createCustomer();
@@ -46,8 +49,7 @@ public class Main {
         }
     }
 
-    private static void customerMenu(CompanyService companyService,
-                                     CarService carService, CustomerService customerService) {
+    private static void customerMenu() {
         System.out.println("\nChoose a customer:");
         int customerOption = -1;
         Scanner scan = new Scanner(System.in);
@@ -100,7 +102,7 @@ public class Main {
         }
     }
 
-    private static void managerMenu(CompanyService companyService, CarService carService) {
+    private static void managerMenu() {
         int subMenuOption = -1;
         Scanner scan = new Scanner(System.in);
         while (subMenuOption != 0) {

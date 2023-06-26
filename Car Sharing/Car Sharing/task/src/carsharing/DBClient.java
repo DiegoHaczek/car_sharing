@@ -18,6 +18,10 @@ public class DBClient {
         this.dbName = dbName;
     }
 
+    public void setDbName(String dbName) {
+        this.dbName = dbName;
+    }
+
     public void run(String query) {
         try (Connection con = DriverManager.getConnection (DATABASE_URL + dbName);
              Statement statement = con.createStatement()

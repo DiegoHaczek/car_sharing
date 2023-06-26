@@ -14,6 +14,10 @@ public class CompanyService {
         dao.createTableCompany();
     }
 
+    public void dropTable(){
+        dao.dropTableCompany();
+    }
+
     public void createCompany(){
             System.out.println("Enter the company name:");
             Scanner scan = new Scanner(System.in);

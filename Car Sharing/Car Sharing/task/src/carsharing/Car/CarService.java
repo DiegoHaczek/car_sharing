@@ -19,6 +19,10 @@ public class CarService {
             dao.createTableCar();
     }
 
+    public void dropTable(){
+        dao.dropTableCar();
+    }
+
     public void createCar(int companyId){
             System.out.println("Enter the car name:");
             Scanner scan = new Scanner(System.in);

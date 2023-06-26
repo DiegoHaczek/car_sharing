@@ -12,7 +12,11 @@ public class CustomerService {
     }
 
     public void createCustomerTable(){
-            dao.createTableCustomer();
+        dao.createTableCustomer();
+    }
+
+    public void dropTable(){
+        dao.dropTableCustomer();
     }
 
     public void createCustomer(){
