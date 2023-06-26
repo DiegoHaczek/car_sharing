@@ -124,7 +124,7 @@ public class Main {
                             carMenuOption = scan.nextInt();
                             switch (carMenuOption) {
                                 case 1 -> carService.listCars(companyOption);
-                                case 2 -> carService.creatCar(companyOption);
+                                case 2 -> carService.createCar(companyOption);
                                 case 0 -> companyOption = 0;
                             }
                         }

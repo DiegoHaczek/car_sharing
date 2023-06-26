@@ -34,7 +34,6 @@ public class CompanyService {
     public String getCompanyName(int companyId){
        try{
            return dao.getCompanyName(companyId);
-
        }catch (SQLException e){
            System.out.println(e.getMessage());
        }
@@ -43,7 +42,7 @@ public class CompanyService {
 
     public int listCompanies(){
         try {
-            dao.listCompanies().ifPresentOrElse(e -> e.forEach(System.out::println),
+            dao.listCompanies().ifPresentOrElse(company -> company.forEach(System.out::println),
                     () -> System.out.println("The company list is empty!"));
             return (int) dao.listCompanies().stream().count();
         }catch (SQLException e)

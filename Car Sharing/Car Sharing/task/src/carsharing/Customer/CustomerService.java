@@ -38,7 +38,7 @@ public class CustomerService {
 
     public int listCustomers(){
         try {
-            dao.listCustomers().ifPresentOrElse(e -> e.forEach(System.out::println),
+            dao.listCustomers().ifPresentOrElse(customer -> customer.forEach(System.out::println),
                     () -> System.out.println("The customer list is empty!"));
             return (int) dao.listCustomers().stream().count();
         }catch (SQLException e)

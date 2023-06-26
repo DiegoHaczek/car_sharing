@@ -1,14 +1,6 @@
 package carsharing.Company;
 
-public class Company{
-    private int id;
-    private String name;
-
-    public Company(int id,String name) {
-        this.id=id;
-        this.name=name;
-    }
-
+public record Company(int id, String name) {
     @Override
     public String toString() {
         return id + ". " + name;
