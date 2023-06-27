@@ -16,8 +16,8 @@ public class CarDAO {
             " primary key (ID), " +
             " foreign key (COMPANY_ID) references COMPANY(ID))";
 
-    private final String SELECT_ALL = "select *, " +
-            "ROW_NUMBER() over(order by id) as NEWID " +
+    private final String SELECT_ALL = "select NAME, " +
+            "ROW_NUMBER() over(order by id) as ID " +
             "from CAR " +
             "where COMPANY_ID = %d ;";
 

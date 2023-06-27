@@ -1,5 +1,6 @@
 package carsharing.Menu;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import static carsharing.Main.customerService;
@@ -16,7 +17,7 @@ public class MainMenu {
         int menuOption = -1;
         while(menuOption != 0) {
             System.out.println("\n1. Log in as a manager\n2. Log in as a customer\n3. Create a customer\n0. Exit");
-            menuOption = scanner.nextInt();
+            menuOption = getMenuOption(menuOption);
             switch (menuOption) {
                 case 1:
                     managerMenu.start();
@@ -31,5 +32,15 @@ public class MainMenu {
                     break;
             }
         }
+    }
+
+    public int getMenuOption(int menuOption) {
+        try{
+            menuOption = scanner.nextInt();}
+        catch (InputMismatchException e){
+            System.out.println("Please select a valid input");
+            scanner.next();
+           }
+        return menuOption;
     }
 }

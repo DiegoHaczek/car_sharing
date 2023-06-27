@@ -1,5 +1,6 @@
 package carsharing.Menu;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import static carsharing.Main.*;
@@ -17,8 +18,8 @@ public class CustomerMenu {
                 break;
             }
             System.out.println("0. Back");
-            customerOption = scanner.nextInt();
-            if (customerOption == 0){break;}
+            customerOption = getMenuOption(customerOption);
+            if (customerOption == 0 || customerOption == -1){break;}
             int subMenuOption = -1;
             while (subMenuOption != 0) {
                 subMenuOption = subMenu(customerOption);
@@ -27,9 +28,9 @@ public class CustomerMenu {
     }
 
     private int subMenu(int customerOption) {
-        int subMenuOption;
+        int subMenuOption = 0;
         System.out.println("\n1. Rent a car\n2. Return a rented car\n3. My rented card\n0. Back");
-        subMenuOption = scanner.nextInt();
+        subMenuOption = getMenuOption(subMenuOption);
         switch (subMenuOption) {
             case 1 -> {
                 if (customerService.checkIfHasRentedCar(customerOption)) {
@@ -56,13 +57,15 @@ public class CustomerMenu {
             return;
         }
         System.out.println("0. Back");
-        int companyOption = scanner.nextInt();
+        int companyOption = 0;
+        companyOption = getMenuOption(companyOption);
         if (companyOption != 0) {
             if (carService.listAvailableCars(companyOption) == 0) {
                 return;
             }
             System.out.println("0. Back");
-            int carOption = scanner.nextInt();
+            int carOption = 0;
+            carOption = getMenuOption(carOption);
             if (carOption == 0) {
                 return;
             }
@@ -76,5 +79,15 @@ public class CustomerMenu {
             return true;
         }
         return false;
+    }
+
+    public int getMenuOption(int menuOption) {
+        try{
+            menuOption = scanner.nextInt();}
+        catch (InputMismatchException e){
+            System.out.println("Please select a valid input");
+            scanner.next();
+        }
+        return menuOption;
     }
 }

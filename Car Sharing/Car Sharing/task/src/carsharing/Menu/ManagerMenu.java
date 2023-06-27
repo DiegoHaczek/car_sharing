@@ -1,5 +1,6 @@
 package carsharing.Menu;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import static carsharing.Main.carService;
@@ -14,7 +15,7 @@ public class ManagerMenu {
         int subMenuOption = -1;
         while (subMenuOption != 0) {
             System.out.println("\n1. Company list\n2. Create a company\n0. Back");
-            subMenuOption = scanner.nextInt();
+            subMenuOption = getMenuOption(subMenuOption);
             switch (subMenuOption) {
                 case 1:
                     subMenu();
@@ -36,13 +37,13 @@ public class ManagerMenu {
                 break;
             }
             System.out.println("0. Back");
-            companyOption = scanner.nextInt();
-            if (companyOption == 0){break;}
+            companyOption = getMenuOption(companyOption);
+            if (companyOption == 0 || companyOption == -1){break;}
             int carMenuOption = -1;
             while (carMenuOption!=0){
                 System.out.println("\n'" + companyService.getCompanyName(companyOption) + "' company");
                 System.out.println("1. Car list\n2. Create a car\n0. Back");
-                carMenuOption = scanner.nextInt();
+                carMenuOption = getMenuOption(carMenuOption);
                 companyOption = companySubMenu(companyOption, carMenuOption);
             }
         }
@@ -55,5 +56,15 @@ public class ManagerMenu {
             case 0 -> companyOption = 0;
         }
         return companyOption;
+    }
+
+    public int getMenuOption(int menuOption) {
+        try{
+            menuOption = scanner.nextInt();}
+        catch (InputMismatchException e){
+            System.out.println("Please select a valid input");
+            scanner.next();
+        }
+        return menuOption;
     }
 }
