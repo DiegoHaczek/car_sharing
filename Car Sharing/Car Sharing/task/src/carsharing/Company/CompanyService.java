@@ -1,6 +1,6 @@
 package carsharing.Company;
 
-import carsharing.DBClient;
+import carsharing.db.DBClient;
 
 import java.util.Scanner;
 
@@ -10,7 +10,7 @@ public class CompanyService {
         this.dao = new CompanyDAO(dbClient);
     }
 
-    public void createCompanyTable(){
+    public void createTable(){
         dao.createTableCompany();
     }
 

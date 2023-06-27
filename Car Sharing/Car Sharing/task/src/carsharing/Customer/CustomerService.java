@@ -1,6 +1,6 @@
 package carsharing.Customer;
 
-import carsharing.DBClient;
+import carsharing.db.DBClient;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -11,7 +11,7 @@ public class CustomerService {
         this.dao = new CustomerDAO(dbClient);
     }
 
-    public void createCustomerTable(){
+    public void createTable(){
         dao.createTableCustomer();
     }
 

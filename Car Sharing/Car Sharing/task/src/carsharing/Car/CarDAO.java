@@ -1,15 +1,10 @@
 package carsharing.Car;
 
-import carsharing.Company.Company;
-import carsharing.DBClient;
+import carsharing.db.DBClient;
 
-import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
-import static carsharing.Main.DATABASE_URL;
 
 public class CarDAO {
 

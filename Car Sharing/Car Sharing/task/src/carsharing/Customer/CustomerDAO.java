@@ -1,6 +1,6 @@
 package carsharing.Customer;
 
-import carsharing.DBClient;
+import carsharing.db.DBClient;
 import java.util.*;
 
 

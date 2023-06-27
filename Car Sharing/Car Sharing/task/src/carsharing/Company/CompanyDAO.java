@@ -1,6 +1,6 @@
 package carsharing.Company;
 
-import carsharing.DBClient;
+import carsharing.db.DBClient;
 
 import java.util.List;
 import java.util.Map;
