@@ -18,6 +18,7 @@ public class Main {
         companyService.createTable();
         carService.createTable();
         customerService.createTable();
+        //asdasd
     }
 
     public static void main(String[] args) {
