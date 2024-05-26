@@ -21,6 +21,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
+        System.out.println("this is a test");
         if (args.length>0){
            dbClient.setDbName(args[1]);
         }
