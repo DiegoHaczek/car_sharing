@@ -18,7 +18,7 @@ public class Main {
         companyService.createTable();
         carService.createTable();
         customerService.createTable();
-        //asdasd
+        //asdasdasd
     }
 
     public static void main(String[] args) {
